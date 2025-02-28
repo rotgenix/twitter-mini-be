@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const dotenv = require('dotenv');
 const cookieParser = require("cookie-parser");
 
@@ -16,6 +17,11 @@ dotenv.config({
 databaseConnection();
 
 // Middlewares
+app.use(cors({
+    origin: process.env.FRONT_END_URL,
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+}));
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
